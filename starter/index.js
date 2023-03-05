@@ -16,16 +16,45 @@ const render = require("./src/page-template.js");
 console.log('Sucess!!')
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
+//--------------------------------------------------------- input validation  ------------------------------------------------------------//
+
+// check if input is empty
+const validateEmpty = (value) => {
+    if(value === ''){
+        return 'Input was empty! try again!'
+    }
+    return true;
+}
+
+// checks if email address is valid
+const validateEmail = (value) => {
+    // regex variable which will test to see if email input is in this format (section)@(section).(section)[.(optionalsection)] 
+    const regex = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+)\.([a-z]{2,7})(\.[a-z]{2,8})?$/;
+    // if email input is not in regex format
+    if(!regex.test(value)){
+        return 'Please enter valid email address'
+    }
+    return true
+}
+
+const validateNumber = (value => {
+    // if value is not a number or is empty string...
+    if(isNaN(value) || validateEmpty(value) === 'Input was empty! try again!'){
+        return 'Please enter a valid number';
+    }
+    return true;
+})
+
 //----------------------------------------------------- objects for inquire prompts -----------------------------------------------------//
 
 // the following objects will be used in the inquirer.prompt method
-const enterName = {name: 'name', message: 'Enter Name'};
-const emailAdd = {name: "emailAdd", message: "Enter email address"};
-const employeeID = {name: 'employeeID', message: "Enter employee ID"};
-const officeNumber = {name: "officeNumb", message: "Enter office number"};
-const ID = {name: 'ID', message: 'Enter ID'};
-const githubUsername = {name: 'github', message: 'Enter your username'};
-const school = {name: 'school', message: 'Enter School'};
+const enterName = {name: 'name', message: 'Enter Name', validate: validateEmpty};
+const emailAdd = {name: "emailAdd", message: "Enter email address", validate: validateEmail};
+const employeeID = {name: 'employeeID', message: "Enter employee ID", validate: validateEmpty};
+const officeNumber = {name: "officeNumb", message: "Enter office number", validate: validateNumber};
+const ID = {name: 'ID', message: 'Enter ID', validate: validateEmpty};
+const githubUsername = {name: 'github', message: 'Enter your username', validate: validateEmpty};
+const school = {name: 'school', message: 'Enter School', validate: validateEmpty};
 const menu = {
     type: 'list',
     name: 'choice',
@@ -84,6 +113,7 @@ const startingPrompts = () => {
     inquirer.prompt([enterName, employeeID, emailAdd, officeNumber, menu]).then((data) => {
         // creating object using class Manager
         const manager = new Manager(data.name, data.employeeID, data.emailAdd, data.officeNumb);
+        console.log(typeof data.employeeID);
         // create team array and add manager object to it
         const team = [manager];
         // carry out choice of end user 
