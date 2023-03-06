@@ -13,14 +13,12 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./src/page-template.js");
 
 
-console.log('Sucess!!')
-
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 //--------------------------------------------------------- input validation  ------------------------------------------------------------//
 
 // check if input is empty
 const validateEmpty = (value) => {
-    if(value === ''){
+    if(value === ''){3
         return 'Input was empty! try again!'
     }
     return true;
@@ -37,13 +35,13 @@ const validateEmail = (value) => {
     return true
 }
 
-const validateNumber = (value => {
+const validateNumber = (value) => {
     // if value is not a number or is empty string...
     if(isNaN(value) || validateEmpty(value) === 'Input was empty! try again!'){
         return 'Please enter a valid number';
     }
     return true;
-})
+}
 
 //----------------------------------------------------- objects for inquire prompts -----------------------------------------------------//
 
@@ -122,5 +120,10 @@ const startingPrompts = () => {
 
     }
 
+function init(){
+    console.log('Thank you for using the Team Profile Generator program')
+    setTimeout(console.log('Please enter the manager information...'), 1000);
+    setTimeout(startingPrompts(), 2000);
+}
 
-startingPrompts();
+init();
