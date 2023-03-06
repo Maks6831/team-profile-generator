@@ -18,7 +18,7 @@ const render = require("./src/page-template.js");
 
 // check if input is empty
 const validateEmpty = (value) => {
-    if(value === ''){3
+    if(value === ''){
         return 'Input was empty! try again!'
     }
     return true;
@@ -30,7 +30,7 @@ const validateEmail = (value) => {
     const regex = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+)\.([a-z]{2,7})(\.[a-z]{2,8})?$/;
     // if email input is not in regex format
     if(!regex.test(value)){
-        return 'Please enter valid email address'
+        return 'Please enter a valid email address'
     }
     return true
 }
@@ -46,30 +46,30 @@ const validateNumber = (value) => {
 //----------------------------------------------------- objects for inquire prompts -----------------------------------------------------//
 
 // the following objects will be used in the inquirer.prompt method
-const enterName = {name: 'name', message: 'Enter Name', validate: validateEmpty};
+const enterName = {name: 'name', message: 'Enter name', validate: validateEmpty};
 const emailAdd = {name: "emailAdd", message: "Enter email address", validate: validateEmail};
 const employeeID = {name: 'employeeID', message: "Enter employee ID", validate: validateEmpty};
 const officeNumber = {name: "officeNumb", message: "Enter office number", validate: validateNumber};
 const ID = {name: 'ID', message: 'Enter ID', validate: validateEmpty};
 const githubUsername = {name: 'github', message: 'Enter your username', validate: validateEmpty};
-const school = {name: 'school', message: 'Enter School', validate: validateEmpty};
+const school = {name: 'school', message: 'Enter your most recent school', validate: validateEmpty};
 const menu = {
     type: 'list',
     name: 'choice',
     message: 'please choose an option',
-    choices: ['Add an Engineer', 'Add an intern', 'Finish building the team']
+    choices: ['Add an engineer', 'Add an intern', 'Finish building the team']
 }
 
 //----------------------------------------------------------- Create HTML page ---------------------------------------------------------//
 
 // writes file to team.html
 const createHtml = (team) => {
-    fs.writeFile(outputPath, render(team), (err) => err? console.log(err): console.log('success'));
+    fs.writeFile(outputPath, render(team), (err) => err? console.log(err): console.log('Thank you for using the Team Profile Generator, your html file should be located in the output folder!'));
 }
 // checks what end user chooses and then executes functions for required output
 const menuOption = (choice, team) => {
     switch (choice) {
-        case 'Add an Engineer':
+        case 'Add an engineer':
             // create engineer object
             engineerPrompt(team);
             break;
@@ -111,7 +111,6 @@ const startingPrompts = () => {
     inquirer.prompt([enterName, employeeID, emailAdd, officeNumber, menu]).then((data) => {
         // creating object using class Manager
         const manager = new Manager(data.name, data.employeeID, data.emailAdd, data.officeNumb);
-        console.log(typeof data.employeeID);
         // create team array and add manager object to it
         const team = [manager];
         // carry out choice of end user 
@@ -120,10 +119,13 @@ const startingPrompts = () => {
 
     }
 
-function init(){
-    console.log('Thank you for using the Team Profile Generator program')
-    setTimeout(console.log('Please enter the manager information...'), 1000);
-    setTimeout(startingPrompts(), 2000);
-}
 
+
+// initializes program
+function init(){
+    console.log('Thank you for using the Team Profile Generator program');
+    console.log('Please enter the manager information...');
+    startingPrompts();
+}
+// start program
 init();
