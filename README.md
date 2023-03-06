@@ -14,7 +14,11 @@ The team profile generator is a NodeJs program which acquires team information f
 ## Installation
 Simply download the files, make sure to run npm so that  the node_modules are available to use locally. Then simply run the command  node index.js (make sure to be in the relevant directory in the terminal) in the terminal command line and the prompts should start to display. 
 ## Usage 
-Simply enter the relevant information when prompted and a team.html file will be created. The prompts created using the Inquirer package are displayed below. 
+Simply enter the relevant information when prompted and a team.html file will be created. The prompts created using the Inquirer package and example run of the program is shown below
+![team profile generator](https://user-images.githubusercontent.com/118021969/223206296-fc47641a-cda9-4554-824d-fecc5a7a20e9.png)
+the output html file is displayed below
+![127 0 0 1_5500_starter_output_team html](https://user-images.githubusercontent.com/118021969/223206695-81c3660c-f599-4010-9da7-746d63a6366c.png)
+
 ## License
 Copyright &copy 2023 Muhammad Ali Khan. Licensed under the MIT license;
 MIT
